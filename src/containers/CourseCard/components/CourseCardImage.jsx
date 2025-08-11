@@ -23,13 +23,25 @@ export const CourseCardImage = ({ cardId, orientation }) => {
   const wrapperClassName = `pgn__card-wrapper-image-cap d-inline-block overflow-visible ${orientation}`;
   const image = (
     <>
-      <img
-        // w-100 is necessary for images on Safari, otherwise stretches full height of the image
-        // https://stackoverflow.com/a/44250830
-        className="pgn__card-image-cap w-100 show"
-        src={bannerImgSrc}
-        alt={formatMessage(messages.bannerAlt)}
-      />
+    <div style={{
+  height: "336px",  // Исправлено на правильную высоту из Figma
+  width: "354px",   // Исправлено на правильную ширину из Figma
+  opacity: 1,
+  borderTopLeftRadius: "20px",
+  borderBottomLeftRadius: "20px",
+  overflow: "hidden" // Добавлено для корректного обрезания изображения по радиусам
+}}>       
+  <img         
+    style={{
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      border: "none"
+    }}
+    src={bannerImgSrc}
+    alt={formatMessage(messages.bannerAlt)}
+  />     
+</div>
       {
         isVerified && (
           <span

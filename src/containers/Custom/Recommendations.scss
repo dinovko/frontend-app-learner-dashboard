@@ -1,0 +1,14 @@
+.recommendations {
+  margin-top: 30px;
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .recommendations-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+}

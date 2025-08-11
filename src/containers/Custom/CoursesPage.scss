@@ -1,0 +1,16 @@
+.courses-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .breadcrumbs {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 16px;
+
+    span {
+      margin: 0 5px;
+      color: #999;
+    }
+  }
+}

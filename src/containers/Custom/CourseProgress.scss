@@ -1,0 +1,45 @@
+.course-progress {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  flex: 1;
+
+  p {
+    font-size: 14px;
+    margin-bottom: 8px;
+
+    span {
+      font-weight: 600;
+      color: #1976d2;
+    }
+  }
+
+  .progress-bar {
+    background: #f0f0f0;
+    border-radius: 4px;
+    height: 8px;
+    margin-bottom: 12px;
+
+    .fill {
+      height: 100%;
+      background: #1976d2;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+  }
+
+  button {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+
+    &:hover {
+      background: #145a9e;
+    }
+  }
+}

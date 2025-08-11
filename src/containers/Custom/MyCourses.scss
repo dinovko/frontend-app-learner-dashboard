@@ -1,0 +1,88 @@
+.my-courses {
+  margin-top: 20px;
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .my-courses-container {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .course-info {
+    display: flex;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 16px;
+    flex: 1;
+    min-width: 300px;
+
+    img {
+      width: 140px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-right: 12px;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin-bottom: 6px;
+      margin-left: 20px;
+      font-family: Inter;
+      font-weight: 500;
+      font-style: Medium;
+      font-size: 20px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      vertical-align: middle;
+    }
+
+    p {
+      margin-left: 20px;
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 8px;
+      font-family: Inter;
+      font-weight: 400;
+      font-style: Regular;
+      font-size: 14px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      vertical-align: middle;
+    }
+
+    .status {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 8px;
+      margin-left: 20px;
+      color: #666;
+
+      &.active {
+        background: #ffeaea;
+        color: #d32f2f;
+      }
+    }
+
+    a[role=button] {
+      background: #1976d2;
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+
+      &:hover {
+        background: #145a9e;
+      }
+    }
+  }
+}
