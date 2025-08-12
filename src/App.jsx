@@ -89,7 +89,7 @@ export const App = () => {
           {/* 
           /
           */}
-          {/* <LearnerDashboardHeader /> */}
+          <LearnerDashboardHeader />
           {/* <main id="main">
             {hasNetworkFailure ? (
               <Alert variant="danger">
@@ -104,7 +104,7 @@ export const App = () => {
             )}
           </main> */}
           <CoursesPage />
-          <Dashboard />
+          {/* <Dashboard /> */}
         </AppWrapper>
         {/* <FooterSlot /> */}
       </div>

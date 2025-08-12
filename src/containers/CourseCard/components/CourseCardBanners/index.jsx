@@ -13,11 +13,11 @@ export const CourseCardBanners = ({ cardId }) => {
   const { isEnrolled } = reduxHooks.useCardEnrollmentData(cardId);
   return (
     <div className="course-card-banners" data-testid="CourseCardBanners">
-      <RelatedProgramsBanner cardId={cardId} />
-      <CourseBannerSlot cardId={cardId} />
-      <EntitlementBanner cardId={cardId} />
-      {isEnrolled && <CertificateBanner cardId={cardId} />}
-      {isEnrolled && <CreditBanner cardId={cardId} />}
+      {/* <RelatedProgramsBanner cardId={cardId} /> */}
+      {/* <CourseBannerSlot cardId={cardId} /> */}
+      {/* <EntitlementBanner cardId={cardId} /> */}
+      {/* {isEnrolled && <CertificateBanner cardId={cardId} />} */}
+      {/* {isEnrolled && <CreditBanner cardId={cardId} />} */}
     </div>
   );
 };

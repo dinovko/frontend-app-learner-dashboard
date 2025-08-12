@@ -11,6 +11,8 @@ import CourseProgress from "./CourseProgress";
 import messages from "../CourseCard/messages";
 import "./MyCourses.scss";
 
+import urls from 'data/services/lms/urls';
+
 const { courseImageClicked } = track.course;
 
 // Хелпер для определения статуса курса
@@ -21,36 +23,32 @@ const getCourseStatus = (isCompleted, isActive) => {
 };
 
 // Компонент изображения курса
-const CourseImage = ({ 
-  bannerImgSrc, 
-  formatMessage, 
-  isVerified, 
-  homeUrl, 
-  handleImageClicked, 
-  disableCourseTitle 
+const CourseImage = ({
+  bannerImgSrc,
+  formatMessage,
+  isVerified,
+  homeUrl,
+  handleImageClicked,
+  disableCourseTitle,
 }) => {
   const imageElement = (
     <>
       <div
         style={{
-          height: "150px",
-          width: "200px",
+          width: "354px",
+          height: "336px",
+          borderTopLeftRadius: "20px",
+          borderBottomLeftRadius: "20px",
+          backgroundImage: `url(${bannerImgSrc || "/images/course1.jpg"})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
           opacity: 1,
-          borderRadius: "8px",
           overflow: "hidden",
         }}
-      >
-        <img
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            border: "none",
-          }}
-          src={bannerImgSrc || "/images/course1.jpg"}
-          alt={formatMessage(messages.bannerAlt) || "course"}
-        />
-      </div>
+        aria-label={formatMessage(messages.bannerAlt) || "course"}
+      />
+
       {isVerified && (
         <span
           className="course-card-verify-ribbon-container"
@@ -83,27 +81,27 @@ const CourseImage = ({
 };
 
 // Компонент кнопки действия курса
-const CourseActionButton = ({ 
-  isArchived, 
-  isEntitlement, 
-  hasStarted, 
-  handleClickBegin, 
-  handleClickResume, 
+const CourseActionButton = ({
+  isArchived,
+  isEntitlement,
+  hasStarted,
+  handleClickBegin,
+  handleClickResume,
   disableResumeCourse,
-  disableBeginCourse 
+  disableBeginCourse,
 }) => {
   if (isArchived || isEntitlement) return null;
 
-  const buttonProps = hasStarted 
+  const buttonProps = hasStarted
     ? {
         onClick: handleClickResume,
         disabled: disableResumeCourse,
-        text: "Продолжить"
+        text: "Продолжить",
       }
     : {
         onClick: handleClickBegin,
         disabled: disableBeginCourse,
-        text: "Начать"
+        text: "Начать",
       };
 
   return (
@@ -122,12 +120,13 @@ const CourseActionButton = ({
 const useCourseData = (cardId) => {
   const execEdTrackingParam = reduxHooks.useCardExecEdTrackingParam(cardId);
   const { bannerImgSrc, displayName } = reduxHooks.useCardCourseData(cardId);
-  const { homeUrl, shortDescription, isStarted, isArchived, resumeUrl } = 
+  const { homeUrl, shortDescription, isStarted, isArchived, resumeUrl } =
     reduxHooks.useCardCourseRunData(cardId);
-  const { isVerified, isActive, isCompleted, hasStarted } = 
+  const { isVerified, isActive, isCompleted, hasStarted } =
     reduxHooks.useCardEnrollmentData(cardId);
-  const { isEntitlement, isFulfilled } = reduxHooks.useCardEntitlementData(cardId);
-  const { disableCourseTitle, disableBeginCourse, disableResumeCourse } = 
+  const { isEntitlement, isFulfilled } =
+    reduxHooks.useCardEntitlementData(cardId);
+  const { disableCourseTitle, disableBeginCourse, disableResumeCourse } =
     useActionDisabledState(cardId);
 
   return {
@@ -147,12 +146,17 @@ const useCourseData = (cardId) => {
     isFulfilled,
     disableCourseTitle,
     disableBeginCourse,
-    disableResumeCourse
+    disableResumeCourse,
   };
 };
 
 // Хук для обработчиков событий
-const useCourseEventHandlers = (cardId, homeUrl, resumeUrl, execEdTrackingParam) => {
+const useCourseEventHandlers = (
+  cardId,
+  homeUrl,
+  resumeUrl,
+  execEdTrackingParam
+) => {
   const handleImageClicked = reduxHooks.useTrackCourseEvent(
     courseImageClicked,
     cardId,
@@ -174,7 +178,7 @@ const useCourseEventHandlers = (cardId, homeUrl, resumeUrl, execEdTrackingParam)
   return {
     handleImageClicked,
     handleClickBegin,
-    handleClickResume
+    handleClickResume,
   };
 };
 
@@ -196,17 +200,17 @@ const CourseItem = ({ cardId, formatMessage }) => {
     isEntitlement,
     disableCourseTitle,
     disableBeginCourse,
-    disableResumeCourse
+    disableResumeCourse,
   } = courseData;
 
-  const { handleImageClicked, handleClickBegin, handleClickResume } = 
+  const { handleImageClicked, handleClickBegin, handleClickResume } =
     useCourseEventHandlers(cardId, homeUrl, resumeUrl, execEdTrackingParam);
 
   const status = getCourseStatus(isCompleted, isActive);
 
   return (
     <div className="my-courses-container" key={cardId}>
-      <div className="course-info">
+      <div className="card">
         <CourseImage
           bannerImgSrc={bannerImgSrc}
           formatMessage={formatMessage}
@@ -215,8 +219,10 @@ const CourseItem = ({ cardId, formatMessage }) => {
           handleImageClicked={handleImageClicked}
           disableCourseTitle={disableCourseTitle}
         />
+      </div>
+      {/* <div className="course-info">
 
-        <div>
+        <div className="details">
           <h3>{displayName || "Обзор финансовой системы Казахстана"}</h3>
           <p>
             {shortDescription ||
@@ -244,7 +250,7 @@ const CourseItem = ({ cardId, formatMessage }) => {
           />
         </div>
       </div>
-      <CourseProgress progress={50} testResult={100} />
+      <CourseProgress progress={50} testResult={100} /> */}
     </div>
   );
 };
@@ -255,12 +261,34 @@ export default function MyCourses({ courseListData }) {
   const { visibleList } = courseListData;
   const isCollapsed = useIsCollapsed();
 
+  const { courseSearchUrl } = reduxHooks.usePlatformSettingsData();
+
+  const [showAll, setShowAll] = React.useState(false);
+  const displayedCourses = showAll ? visibleList : visibleList.slice(0, 2);
+
   return (
     <section className="my-courses">
-      <h2>Мои курсы</h2>
-      {visibleList.map(({ cardId }) => (
-        <CourseItem key={cardId} cardId={cardId} formatMessage={formatMessage} />
-      ))}
+      <div className="my-courses__header">
+        <h2>Мои курсы</h2>
+        {visibleList.length > 1 && (
+          <a className="course-search-url" href={urls.baseAppUrl(courseSearchUrl)}>Посмотреть мои курсы</a>
+          // <button type="button" onClick={() => setShowAll((prev) => !prev)}>
+          //   {showAll ? "Скрыть" : "Посмотреть мои курсы >"}
+          // </button>
+        )}
+      </div>
+
+      <div className="my-courses-container">
+        {displayedCourses.map(({ cardId }, index) => (
+          <div
+            key={cardId}
+            className={`course-fade ${showAll && index > 0 ? "fade-in" : ""}`}
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
+            <CourseItem cardId={cardId} formatMessage={formatMessage} />
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

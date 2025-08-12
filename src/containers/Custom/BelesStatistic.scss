@@ -1,0 +1,342 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+//   background-color: rgba(245, 245, 247, 1);
+  padding: 30px 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+
+  .stats-section {
+    width: 100%;
+    height: 463px;
+    background: #15171e;
+    position: relative;
+    overflow: hidden;
+    font-family:
+      "SF Pro Display",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .section-title {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 39px;
+    color: #ffffff;
+    margin: 49px 0 41px 0;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 376px 376px 368px;
+    gap: 102px;
+    height: 245px;
+  }
+
+  /* Общие стили для блоков */
+  .block-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding-right: 16px;
+  }
+
+  .block-title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .block-value {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #ffffff;
+  }
+
+  /* Блок прогресса изучения */
+  .progress-block {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #22242c;
+    border-radius: 4px;
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #16c3fa 0%, #18abfe 0.01%, #00628c 100%);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+  }
+
+  .modules-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .module-item {
+    background: rgba(21, 23, 30, 0.8);
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .module-item.completed {
+    color: #ffffff;
+  }
+
+  .module-item.incomplete {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .module-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Блок последнего теста */
+  .last-test-block {
+    position: relative;
+  }
+
+  .test-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #22242c;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+
+  .test-progress-fill {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 4px;
+  }
+
+  .test-description {
+    margin-bottom: 8px;
+  }
+
+  .test-link {
+    background: none;
+    border: none;
+    color: #18abfe;
+    font-family: "SF Pro Display", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .test-link:hover {
+    opacity: 0.8;
+    transform: translateX(2px);
+  }
+
+  .test-link:focus {
+    outline: 2px solid #18abfe;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Блок графика */
+  .chart-block {
+    position: relative;
+  }
+
+  .chart-container {
+    position: relative;
+    height: 113px;
+    margin: 40px 0 16px 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  .chart-bar {
+    width: 8px;
+    background: linear-gradient(180deg, #fa8316 0%, rgba(250, 131, 22, 0) 100%);
+    border-radius: 4px;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .chart-bar:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+  }
+
+  .chart-bar.highlighted {
+    background:
+      linear-gradient(0deg, #ffffff, #ffffff),
+      linear-gradient(180deg, #fa8316 0%, rgba(250, 131, 22, 0) 100%);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+
+  .chart-max-label {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(21, 23, 30, 0.8);
+    border-radius: 4px;
+    padding: 8px 4px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #ffffff;
+    white-space: nowrap;
+  }
+
+  .chart-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+  }
+
+  .chart-label {
+    background: rgba(21, 23, 30, 0.8);
+    border-radius: 4px;
+    padding: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  /* Адаптивность */
+  @media (max-width: 1200px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      height: auto;
+    }
+
+    .container {
+      padding: 0 20px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      text-align: center;
+    }
+
+    .progress-block,
+    .last-test-block,
+    .chart-block {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .stats-section {
+      height: auto;
+      padding: 40px 0;
+    }
+
+    .section-title {
+      font-size: 24px;
+      margin: 20px 0 30px 0;
+    }
+
+    .stats-grid {
+      gap: 30px;
+    }
+
+    .chart-container {
+      height: 80px;
+      padding: 0 10px;
+    }
+
+    .chart-bar {
+      width: 6px;
+    }
+
+    .block-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .modules-list {
+      gap: 8px;
+    }
+
+    .module-item {
+      margin-bottom: 8px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding: 0 16px;
+    }
+
+    .section-title {
+      font-size: 20px;
+    }
+
+    .block-title,
+    .block-value {
+      font-size: 14px;
+    }
+
+    .chart-container {
+      height: 60px;
+      padding: 0 5px;
+    }
+
+    .chart-bar {
+      width: 4px;
+    }
+  }
+}

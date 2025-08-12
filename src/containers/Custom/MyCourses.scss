@@ -1,15 +1,100 @@
 .my-courses {
   margin-top: 20px;
+  margin-bottom: 50px;
 
-  h2 {
-    font-size: 20px;
-    margin-bottom: 12px;
+  .course-fade {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease;
+
+    &.fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.4s ease forwards;
+    }
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    height: 3rem;
+    h2 {
+      font-family: Inter;
+      font-weight: 500;
+      font-style: Medium;
+      font-size: 32px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      vertical-align: middle;
+    }
+
+    .course-search-url {
+      font-family: Inter;
+      font-weight: 600;
+      font-style: Semi Bold;
+      font-size: 16px;
+      line-height: 100%;
+      letter-spacing: 0%;
+
+      background: none;
+      border: none;
+      padding: 0;
+      color: "#1976d2"; // синий в стиле ссылок/текстовых кнопок
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      color: rgba(150, 150, 150, 1);
+      &::after {
+        margin-left: 6px;
+        text-decoration: solid;
+        content: ">";
+      }
+    }
   }
 
   .my-courses-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr; // одна колонка
     gap: 16px;
-    flex-wrap: wrap;
+    // display: flex;
+    // flex-direction: row;
+    // gap: 36px;
+
+    // flex-wrap: wrap;
+    // min-height: 336px;
+    // border: 1px solid red;
+
+    .card {
+      box-sizing: border-box;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 4px 10px #dadada;
+      border-radius: 20px;
+
+      // вместо фиксированной ширины — адаптив
+      flex: 1 1 320px; // базовая ширина, но может сжиматься/растягиваться
+      min-width: 280px; // минимальная
+      max-width: 100%; // максимальная
+
+      // фиксированная высота нежелательна, но если надо:
+      height: 336px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
   }
 
   .course-info {
@@ -17,71 +102,80 @@
     background: #fff;
     border: 1px solid #eee;
     border-radius: 8px;
-    padding: 16px;
+    padding: 0;
     flex: 1;
     min-width: 300px;
+    margin-bottom: 30px;
 
-    img {
-      width: 140px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 6px;
-      margin-right: 12px;
-    }
-
-    h3 {
-      font-size: 20px;
-      margin-bottom: 6px;
-      margin-left: 20px;
-      font-family: Inter;
-      font-weight: 500;
-      font-style: Medium;
-      font-size: 20px;
-      line-height: 100%;
-      letter-spacing: 0%;
-      vertical-align: middle;
-    }
-
-    p {
-      margin-left: 20px;
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 8px;
-      font-family: Inter;
-      font-weight: 400;
-      font-style: Regular;
-      font-size: 14px;
-      line-height: 100%;
-      letter-spacing: 0%;
-      vertical-align: middle;
-    }
-
-    .status {
-      font-size: 12px;
-      padding: 4px 8px;
-      border-radius: 4px;
-      display: inline-block;
-      margin-bottom: 8px;
-      margin-left: 20px;
-      color: #666;
-
-      &.active {
-        background: #ffeaea;
-        color: #d32f2f;
+    .details {
+      padding: 20px;
+      img {
+        width: 354px;
+        height: 336px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin-right: 12px;
       }
-    }
 
-    a[role=button] {
-      background: #1976d2;
-      color: #fff;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
+      h3 {
+        font-family: Inter;
+        font-weight: 500;
+        font-style: Medium;
+        font-size: 20px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        vertical-align: middle;
+      }
 
-      &:hover {
-        background: #145a9e;
+      .language {
+        p {
+          font-family: Inter;
+          font-weight: 500;
+          font-style: Medium;
+          font-size: 16px;
+          line-height: 100%;
+          letter-spacing: 0%;
+          vertical-align: middle;
+        }
+      }
+
+      p {
+        font-size: 14px;
+        color: #666;
+        font-family: Inter;
+        font-weight: 400;
+        font-style: Regular;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        vertical-align: middle;
+      }
+
+      .status {
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        display: inline-block;
+        color: #666;
+
+        &.active {
+          background: #ffeaea;
+          color: #d32f2f;
+        }
+      }
+
+      a[role="button"] {
+        background: #1976d2;
+        color: #fff;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+
+        &:hover {
+          background: #145a9e;
+        }
       }
     }
   }

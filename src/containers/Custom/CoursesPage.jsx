@@ -1,11 +1,14 @@
 import { reduxHooks } from 'hooks';
+import hooks from '../Dashboard/hooks';
 import { useCourseListData } from "../CoursesPanel/hooks";
 import SearchBar from "./SearchBar";
 import MyCourses from "./MyCourses";
 import Recommendations from "./Recommendations";
 import "./CoursesPage.scss"; // общие стили страницы
+import BelesStatistic from './BelesStatistic';
 
 export default function CoursesPage() {
+  hooks.useInitializeDashboard();
   const courseListData = useCourseListData();
   const hasCourses = reduxHooks.useHasCourses();
   return (
@@ -25,6 +28,9 @@ export default function CoursesPage() {
 
       {/* Рекомендации */}
       {/* <Recommendations /> */}
+
+      {/* Beles статистика */}
+      <BelesStatistic />
     </div>
   );
 }
