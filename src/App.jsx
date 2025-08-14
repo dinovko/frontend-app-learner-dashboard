@@ -89,7 +89,7 @@ export const App = () => {
           {/* 
           /
           */}
-          <LearnerDashboardHeader />
+          {/* <LearnerDashboardHeader /> */}
           {/* <main id="main">
             {hasNetworkFailure ? (
               <Alert variant="danger">

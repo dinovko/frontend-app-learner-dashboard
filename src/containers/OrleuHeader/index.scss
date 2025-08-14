@@ -13,6 +13,42 @@
     justify-content: space-between;
     min-width: 300px;
 
+    .user-controls {
+      position: relative;
+      
+      .dropdown-menu-1 {
+        position: absolute;
+        top: 55px;
+        right: 0px;
+        background: #2c3e50;
+        border-radius: 8px;
+        padding: 10px 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 9999;
+
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+
+          li {
+            padding: 10px 20px;
+
+            a {
+              color: #fff;
+              text-decoration: none;
+              font-size: 14px;
+              display: block;
+            }
+
+            &:hover {
+              background: #34495e;
+            }
+          }
+        }
+      }
+    }
+
     .language-switcher {
       font-family: Inter;
       font-weight: 600;
@@ -56,17 +92,17 @@
       width: 50px;
       height: 50px;
       border-radius: 50%;
-    //   background: linear-gradient(135deg, #f39c12, #e67e22);
+      //   background: linear-gradient(135deg, #f39c12, #e67e22);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       transition: transform 0.2s ease;
       position: relative;
-       img {
+      img {
         height: 30px;
         width: 30px;
-       }
+      }
     }
 
     .user-avatar:hover {
