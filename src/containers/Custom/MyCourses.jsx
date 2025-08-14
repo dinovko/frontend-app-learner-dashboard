@@ -11,7 +11,7 @@ import CourseProgress from "./CourseProgress";
 import messages from "../CourseCard/messages";
 import "./MyCourses.scss";
 
-import urls from 'data/services/lms/urls';
+import urls from "data/services/lms/urls";
 
 const { courseImageClicked } = track.course;
 
@@ -32,19 +32,14 @@ const CourseImage = ({
   disableCourseTitle,
 }) => {
   const imageElement = (
-    <>
+    <div className="course-image">
       <div
         style={{
-          width: "354px",
-          height: "336px",
-          borderTopLeftRadius: "20px",
-          borderBottomLeftRadius: "20px",
+          width: "100%",
+          height: "100%",
           backgroundImage: `url(${bannerImgSrc || "/images/course1.jpg"})`,
-          backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          opacity: 1,
-          overflow: "hidden",
+          backgroundSize: "cover",
         }}
         aria-label={formatMessage(messages.bannerAlt) || "course"}
       />
@@ -63,11 +58,11 @@ const CourseImage = ({
           />
         </span>
       )}
-    </>
+    </div>
   );
 
   return disableCourseTitle ? (
-    <div>{imageElement}</div>
+    imageElement
   ) : (
     <a
       href={homeUrl}
@@ -105,21 +100,22 @@ const CourseActionButton = ({
       };
 
   return (
-    <a
-      href="#"
-      role="button"
+    <button
+      className="course-action-button"
       onClick={buttonProps.onClick}
       disabled={buttonProps.disabled}
     >
       {buttonProps.text}
-    </a>
+    </button>
   );
 };
 
 // Хук для получения данных курса
 const useCourseData = (cardId) => {
   const execEdTrackingParam = reduxHooks.useCardExecEdTrackingParam(cardId);
-  const { bannerImgSrc, displayName } = reduxHooks.useCardCourseData(cardId);
+  const a = reduxHooks.useCardCourseData(cardId);
+  const { bannerImgSrc, courseName:displayName } =
+    reduxHooks.useCardCourseData(cardId);
   const { homeUrl, shortDescription, isStarted, isArchived, resumeUrl } =
     reduxHooks.useCardCourseRunData(cardId);
   const { isVerified, isActive, isCompleted, hasStarted } =
@@ -128,6 +124,12 @@ const useCourseData = (cardId) => {
     reduxHooks.useCardEntitlementData(cardId);
   const { disableCourseTitle, disableBeginCourse, disableResumeCourse } =
     useActionDisabledState(cardId);
+
+  console.log(
+    `Course ID: ${cardId}, displayName:`,
+    displayName,
+    JSON.stringify(a)
+  ); // Debug log
 
   return {
     execEdTrackingParam,
@@ -182,9 +184,92 @@ const useCourseEventHandlers = (
   };
 };
 
+// Компонент прогресса курса
+const CourseProgressSection = ({ progress = 0, topics, testResult = 100 }) => {
+  const topicsData = topics || [
+    { name: "Модуль 1", completed: true },
+    { name: "Модуль 2", completed: true },
+    { name: "Модуль 3", completed: false },
+    { name: "Модуль 4", completed: false },
+  ];
+
+  return (
+    <div className="course-stat">
+      <h3 className="stats-header">Статистика по курсу</h3>
+
+      <div className="progress-section">
+        <div className="progress-info">
+          <span className="label">Курс изучен на:</span>
+          <span className="percentage">{progress}%</span>
+        </div>
+
+        <div className="progress-bar">
+          <div className="progress-fill" style={{ width: `${progress}%` }} />
+        </div>
+
+        <div className="topics-list">
+          {topicsData.map((topic, index) => (
+            <div
+              key={index}
+              className={`topic-item ${topic.completed ? "completed" : "incomplete"}`}
+            >
+              {topic.name}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="test-section">
+        <div className="test-info">
+          <span className="label">Результаты последнего теста:</span>
+          <span className="percentage">{testResult}%</span>
+        </div>
+
+        <div className="test-action">
+          <button className="test-button">Пройти тест</button>
+        </div>
+
+        <div className="test-encouragement">
+          Улучши результаты или закрепи знания
+        </div>
+      </div>
+    </div>
+  );
+};
+const CourseAdditionalInfo = ({ cardId }) => {
+  // Здесь можно добавить дополнительные данные через API или Redux
+  const [courseDetails, setCourseDetails] = React.useState({
+    language: "Қазақша / Орысша",
+    rating: 0,
+    ratingCount: 0,
+    enrolledCount: 0,
+  });
+
+  return (
+    <div className="language-info">
+      <div className="language-label">
+        Язык обучения: {courseDetails.language}
+      </div>
+      <div className="stats-row">
+        <div className="participants">
+          <div className="icon">👥</div>
+          <span className="count">{courseDetails.enrolledCount}</span>
+        </div>
+        <div className="rating">
+          <div className="icon">⭐</div>
+          <span className="value">
+            {courseDetails.rating}{" "}({courseDetails.ratingCount})
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Основной компонент курса
-const CourseItem = ({ cardId, formatMessage }) => {
+const CourseItem = ({ cardId, formatMessage, courseProvider }) => {
   const courseData = useCourseData(cardId);
+  console.info('====',JSON.stringify(courseProvider))
   const {
     execEdTrackingParam,
     bannerImgSrc,
@@ -208,49 +293,58 @@ const CourseItem = ({ cardId, formatMessage }) => {
 
   const status = getCourseStatus(isCompleted, isActive);
 
-  return (
-    <div className="my-courses-container" key={cardId}>
-      <div className="card">
-        <CourseImage
-          bannerImgSrc={bannerImgSrc}
-          formatMessage={formatMessage}
-          isVerified={isVerified}
-          homeUrl={homeUrl}
-          handleImageClicked={handleImageClicked}
-          disableCourseTitle={disableCourseTitle}
-        />
-      </div>
-      {/* <div className="course-info">
+  // Функция для обрезки описания
+  const truncateDescription = (text, maxLength = 200) => {
+    if (!text)
+      return "";
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + "...";
+  };
 
-        <div className="details">
-          <h3>{displayName || "Обзор финансовой системы Казахстана"}</h3>
-          <p>
-            {shortDescription ||
-              "Курс познакомит вас с основами финансовой системы Казахстана..."}
-          </p>
-          <div className="language">
-            <p>Язык обучения: </p>
+  return (
+    <div className="card" key={cardId}>
+      <CourseImage
+        bannerImgSrc={bannerImgSrc}
+        formatMessage={formatMessage}
+        isVerified={isVerified}
+        homeUrl={homeUrl}
+        handleImageClicked={handleImageClicked}
+        disableCourseTitle={disableCourseTitle}
+      />
+
+      <div className="course-info">
+        <div className="course-header">
+          <h3 className="title">
+            {displayName || ""}
+          </h3>
+          <div className="description">
+            {/* {truncateDescription(shortDescription)} */}
+            {truncateDescription(courseProvider.courseProvider.name)}
           </div>
-          <div className="rating-people">
-            <div className="people"></div>
-            <div className="rating"></div>
+        </div>
+
+        <div className="course-details">
+          <CourseAdditionalInfo cardId={cardId} />
+
+          <div className="action-row">
+            <span className={`status ${status.class}`}>{status.text}</span>
+
+            <CourseActionButton
+              isArchived={isArchived}
+              isEntitlement={isEntitlement}
+              hasStarted={hasStarted}
+              handleClickBegin={handleClickBegin}
+              handleClickResume={handleClickResume}
+              disableResumeCourse={disableResumeCourse}
+              disableBeginCourse={disableBeginCourse}
+            />
           </div>
-          <span className={`status ${status.class}`}>
-            {status.text}
-          </span>
-          
-          <CourseActionButton
-            isArchived={isArchived}
-            isEntitlement={isEntitlement}
-            hasStarted={hasStarted}
-            handleClickBegin={handleClickBegin}
-            handleClickResume={handleClickResume}
-            disableResumeCourse={disableResumeCourse}
-            disableBeginCourse={disableBeginCourse}
-          />
         </div>
       </div>
-      <CourseProgress progress={50} testResult={100} /> */}
+
+      <div className="divider"></div>
+
+      <CourseProgressSection progress={50} testResult={100} />
     </div>
   );
 };
@@ -266,15 +360,29 @@ export default function MyCourses({ courseListData }) {
   const [showAll, setShowAll] = React.useState(false);
   const displayedCourses = showAll ? visibleList : visibleList.slice(0, 2);
 
+  // Отладочная информация
+  React.useEffect(() => {
+    console.log("Course List Data:", courseListData);
+    console.log("Visible courses:", visibleList);
+
+    // Выводим информацию о первом курсе для отладки
+    if (visibleList.length > 0) {
+      const firstCourseId = visibleList[0].cardId;
+      console.log("First course ID:", firstCourseId);
+    }
+  }, [courseListData, visibleList]);
+
   return (
     <section className="my-courses">
       <div className="my-courses__header">
         <h2>Мои курсы</h2>
         {visibleList.length > 1 && (
-          <a className="course-search-url" href={urls.baseAppUrl(courseSearchUrl)}>Посмотреть мои курсы</a>
-          // <button type="button" onClick={() => setShowAll((prev) => !prev)}>
-          //   {showAll ? "Скрыть" : "Посмотреть мои курсы >"}
-          // </button>
+          <a
+            className="course-search-url"
+            href={urls.baseAppUrl(courseSearchUrl)}
+          >
+            Посмотреть мои курсы
+          </a>
         )}
       </div>
 
@@ -285,10 +393,16 @@ export default function MyCourses({ courseListData }) {
             className={`course-fade ${showAll && index > 0 ? "fade-in" : ""}`}
             style={{ animationDelay: `${index * 0.1}s` }}
           >
-            <CourseItem cardId={cardId} formatMessage={formatMessage} />
+            <CourseItem cardId={cardId} formatMessage={formatMessage} courseProvider={displayedCourses[index]}  />
           </div>
         ))}
       </div>
+
+      {visibleList.length === 0 && (
+        <div className="no-courses-message">
+          <p>У вас пока нет зарегистрированных курсов</p>
+        </div>
+      )}
     </section>
   );
 }

@@ -10,7 +10,6 @@ const OrleuHeader = () => {
   //#region Profile
   const config = getConfig();
 
-  console.info(config);
   const user = getAuthenticatedUser();
   const accountProfileURL = config.ACCOUNT_PROFILE_URL;
   const profileHref = `${accountProfileURL}/u/${user.username}`;
