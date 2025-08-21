@@ -1,11 +1,31 @@
 .course-card {
   .card {
+    border-radius: 0.75rem !important; /* 12px */
+    height: 18rem; /* 288px */
+    overflow: hidden;
+    
+
+    
     .pgn__card-wrapper-image-cap.vertical {
       display: flex;
       min-height: var(--pgn-size-card-image-vertical-max-height);
     }
+    .pgn__card-wrapper-image-cap {
+      width: 20.5625rem !important; /* 329px */
+      height: 18rem !important; /* 288px */
+      display: flex !important;
+      align-items: stretch !important;
+    }
+    
     .pgn__card-image-cap {
       border-bottom-left-radius: 0 !important;
+      border-top-left-radius: 1.25rem !important; /* 20px */
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover;
+      flex: 1;
     }
     .overflow-visible {
       overflow: visible;

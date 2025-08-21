@@ -20,15 +20,17 @@ export const CourseCardImage = ({ cardId, orientation }) => {
   const { isVerified } = reduxHooks.useCardEnrollmentData(cardId);
   const { disableCourseTitle } = useActionDisabledState(cardId);
   const handleImageClicked = reduxHooks.useTrackCourseEvent(courseImageClicked, cardId, homeUrl);
-  const wrapperClassName = `pgn__card-wrapper-image-cap d-inline-block overflow-visible ${orientation}`;
+  
+  const wrapperClassName = `pgn__card-wrapper-image-cap d-flex align-items-stretch ${orientation}`;
   const image = (
     <>
       <img
-        // w-100 is necessary for images on Safari, otherwise stretches full height of the image
-        // https://stackoverflow.com/a/44250830
-        className="pgn__card-image-cap w-100 show"
+        className="pgn__card-image-cap w-100 h-100 show"
         src={bannerImgSrc}
         alt={formatMessage(messages.bannerAlt)}
+        style={{
+          borderRadius: '1.25rem 0 0 1.25rem' /* 20px 0px 0px 20px */
+        }}
       />
       {
         isVerified && (
@@ -45,6 +47,7 @@ export const CourseCardImage = ({ cardId, orientation }) => {
       }
     </>
   );
+  
   return disableCourseTitle
     ? (<div className={wrapperClassName}>{image}</div>)
     : (
@@ -58,6 +61,7 @@ export const CourseCardImage = ({ cardId, orientation }) => {
       </a>
     );
 };
+
 CourseCardImage.propTypes = {
   cardId: PropTypes.string.isRequired,
   orientation: PropTypes.string.isRequired,

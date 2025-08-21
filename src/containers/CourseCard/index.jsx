@@ -10,6 +10,7 @@ import CourseCardMenu from './components/CourseCardMenu';
 import CourseCardActions from './components/CourseCardActions';
 import CourseCardDetails from './components/CourseCardDetails';
 import CourseCardTitle from './components/CourseCardTitle';
+import CourseDescription from './components/CourseDescription';
 
 import './CourseCard.scss';
 
@@ -31,13 +32,19 @@ export const CourseCard = ({
               />
               <Card.Section className="pt-0">
                 <CourseCardDetails cardId={cardId} />
+                <CourseDescription cardId={cardId} />
               </Card.Section>
-              <Card.Footer orientation={orientation}>
+              {/* <Card.Footer orientation={orientation}>
                 <CourseCardActions cardId={cardId} />
-              </Card.Footer>
+              </Card.Footer> */}
+              <div
+                className="d-flex justify-content-end align-items-end p-3"
+                style={{ height: '180px' }} >
+                <CourseCardActions cardId={cardId} />
+              </div>
             </Card.Body>
           </div>
-          <CourseCardBanners cardId={cardId} />
+          {/* <CourseCardBanners cardId={cardId} /> */}
         </div>
       </Card>
     </div>

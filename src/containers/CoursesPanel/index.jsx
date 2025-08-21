@@ -26,8 +26,10 @@ export const CoursesPanel = () => {
   const courseListData = useCourseListData();
   return (
     <div className="course-list-container">
-      <div className="course-list-heading-container">
-        <h2 className="course-list-title">{formatMessage(messages.myCourses)}</h2>
+      <div className="course-list-heading-container d-flex justify-content-end mb-4">
+        {/* <h2 className="course-list-title">
+          {formatMessage(messages.myCourses)}
+          </h2> */}
         <div className="course-filter-controls-container">
           <CourseFilterControls {...courseListData.filterOptions} />
         </div>

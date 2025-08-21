@@ -24,6 +24,9 @@ import fakeData from 'data/services/lms/fakeData/courses';
 
 import AppWrapper from 'containers/WidgetContainers/AppWrapper';
 import LearnerDashboardHeader from 'containers/LearnerDashboardHeader';
+import OrleuHeader from 'components/OrleuHeader';
+import Breadcrumbs from 'components/Breadcrumbs';
+import CoursesHeader from 'components/CoursesHeader';
 
 import { getConfig } from '@edx/frontend-platform';
 import messages from './messages';
@@ -79,7 +82,10 @@ export const App = () => {
       </Helmet>
       <div>
         <AppWrapper>
-          <LearnerDashboardHeader />
+          <OrleuHeader />
+          <Breadcrumbs />
+          {/* <LearnerDashboardHeader /> */}
+          <CoursesHeader />
           <main id="main">
             {hasNetworkFailure
               ? (
@@ -91,7 +97,7 @@ export const App = () => {
               )}
           </main>
         </AppWrapper>
-        <FooterSlot />
+        {/* <FooterSlot /> */}
       </div>
     </>
   );

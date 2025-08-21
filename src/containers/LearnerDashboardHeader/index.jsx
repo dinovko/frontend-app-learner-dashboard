@@ -12,6 +12,8 @@ import { useLearnerDashboardHeaderMenu, findCoursesNavClicked } from './hooks';
 
 import './index.scss';
 
+
+
 export const LearnerDashboardHeader = () => {
   const { authenticatedUser } = React.useContext(AppContext);
   const { courseSearchUrl } = reduxHooks.usePlatformSettingsData();
