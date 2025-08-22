@@ -36,7 +36,6 @@ export const BeginCourseButton = ({ cardId }) => {
         borderRadius: '8px',
         fontSize: '16px',
         lineHeight: '19px',
-        fontFamily: 'Inter, sans-serif',
         textDecoration: 'none'
       }}
     >

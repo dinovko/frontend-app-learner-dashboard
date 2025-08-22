@@ -20,7 +20,6 @@ const Breadcrumbs = () => {
             color: '#969696',
             fontSize: '16px',
             lineHeight: '19px',
-            fontFamily: 'Inter, sans-serif'
           }}>
           {intl.formatMessage(messages2.dashboard)}
         </a>
@@ -31,7 +30,6 @@ const Breadcrumbs = () => {
             color: '#969696',
             fontSize: '16px',
             lineHeight: '19px',
-            fontFamily: 'Inter, sans-serif'
           }}>
           &gt;
         </span>
@@ -41,7 +39,6 @@ const Breadcrumbs = () => {
               color: '#000000',
               fontSize: '16px',
               lineHeight: '19px',
-              fontFamily: 'Inter, sans-serif'
             }}>
             {intl.formatMessage(messages.myCourses)}
           </span>
