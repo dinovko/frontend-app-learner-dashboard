@@ -10,7 +10,7 @@ const CoursesHeader = () => {
         </h1>
       </div>
       
-      <div className="d-flex align-items-center ms-4">
+      {/* <div className="d-flex align-items-center ms-4">
         <a href="#" className="text-decoration-none d-flex align-items-center gap-2">
           <span className="text-muted fw-medium">
             Просмотреть мои курсы
@@ -19,7 +19,7 @@ const CoursesHeader = () => {
             &gt;
           </span>
         </a>
-      </div>
+      </div> */}
     </div>
   );
 };

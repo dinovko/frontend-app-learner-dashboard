@@ -3,6 +3,7 @@ import { getConfig } from '@edx/frontend-platform';
 import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
 import { useIntl,defineMessages } from '@edx/frontend-platform/i18n';
 import defaultProfile from '../../assets/default_profile.png';
+import defaultLogoWhite from '../../assets/orleu_logo_white.svg';
 
 const messages = defineMessages({
   profile: {
@@ -33,7 +34,7 @@ const OrleuHeader = () => {
 
   const LMS_BASE_URL = getConfig().LMS_BASE_URL;
   const LOGOUT_URL = getConfig().LOGOUT_URL;
-  const ACCOUNT_PROFILE_URL = getConfig().ACCOUNT_PROFILE_URL;
+  const ACCOUNT_PROFILE_URL = `${getConfig().ACCOUNT_PROFILE_URL}/u/${currentUser}`;
   const ACCOUNT_SETTINGS_URL = getConfig().ACCOUNT_SETTINGS_URL;
 
   async function getCurrentUser() {
@@ -72,8 +73,7 @@ const OrleuHeader = () => {
         style={{ maxWidth: '1400px', height: '100%' }}>
         <div className="d-flex align-items-center">
           <div className="d-flex align-items-center justify-content-center text-white fw-bold border-opacity-10"
-            style={{ width: '71.1px', height: '19.23px', fontSize: '16px' }}>
-            ORLEU
+            style={{ width: '71.1px', height: '19.23px', fontSize: '16px',backgroundImage: `url(${defaultLogoWhite})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }}>
           </div>
         </div>
 
