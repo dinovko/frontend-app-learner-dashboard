@@ -22,7 +22,7 @@ import track from 'tracking';
 
 import fakeData from 'data/services/lms/fakeData/courses';
 
-import AppWrapper from 'containers/WidgetContainers/AppWrapper';
+import AppWrapper from 'containers/AppWrapper';
 import LearnerDashboardHeader from 'containers/LearnerDashboardHeader';
 import OrleuHeader from 'components/OrleuHeader';
 import Breadcrumbs from 'components/Breadcrumbs';
