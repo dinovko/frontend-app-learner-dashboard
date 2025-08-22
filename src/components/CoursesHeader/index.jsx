@@ -1,12 +1,15 @@
 import React from 'react';
+import { useIntl } from '@edx/frontend-platform/i18n';
+import messages from '../../containers/CoursesPanel/messages';
 
 const CoursesHeader = () => {
+  const intl = useIntl();
   return (
     <div className="d-flex align-items-center justify-content-start px-3 mx-auto py-4"
          style={{ maxWidth: '1400px', gap:'1rem' }}>
       <div className="d-flex align-items-center">
         <h1 className="h2 fw-bold text-dark mb-0">
-          Мои курсы
+        {intl.formatMessage(messages.myCourses)}
         </h1>
       </div>
       

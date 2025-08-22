@@ -79,9 +79,8 @@ const OrleuHeader = () => {
 
         <div className="d-flex align-items-center position-relative" ref={dropdownRef}>
           <div
-            className="rounded-circle border border-white border-opacity-10 d-flex align-items-center justify-content-center cursor-pointer overflow-hidden"
+            className="rounded-circle border border-white border-opacity-10 d-flex align-items-center justify-content-center cursor-pointer overflow-hidden mr-2"
             style={{ width: '30px', height: '30px' }}
-            onClick={toggleDropdown}
           >
             <img
               src={defaultProfile}
@@ -90,14 +89,14 @@ const OrleuHeader = () => {
               style={{ objectFit: 'cover' }}
             />
           </div>
-          <div className="d-flex flex-column justify-content-between ml-2"
-            style={{ width: '14px', height: '12px' }}>
-            <div className="bg-white border border-white border-opacity-10"
-              style={{ width: '2px', height: '14px', transform: 'rotate(90deg)' }}></div>
-            <div className="bg-white border border-white border-opacity-10"
-              style={{ width: '2px', height: '14px', transform: 'rotate(90deg)' }}></div>
-            <div className="bg-white border border-white border-opacity-10"
-              style={{ width: '2px', height: '14px', transform: 'rotate(90deg)' }}></div>
+          <div className="d-flex flex-column justify-content-between ml-2 position-relative mb-2"
+            style={{ width: '14px', height: '12px' }} onClick={toggleDropdown}>
+            <div className="bg-white border border-white border-opacity-10 position-absolute"
+              style={{ width: '2px', height: '14px', top: '0px', left: '0px', transform: 'rotate(90deg)' }}></div>
+            <div className="bg-white border border-white border-opacity-10 position-absolute"
+              style={{ width: '2px', height: '14px', top: '5px', left: '0px', transform: 'rotate(90deg)' }}></div>
+            <div className="bg-white border border-white border-opacity-10 position-absolute"
+              style={{ width: '2px', height: '14px', top: '10px', left: '0px', transform: 'rotate(90deg)' }}></div>
           </div>
 
           {/* Dropdown Menu */}
