@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { getConfig } from '@edx/frontend-platform';
 import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
-import { useIntl,defineMessages } from '@edx/frontend-platform/i18n';
+import { useIntl, defineMessages } from '@edx/frontend-platform/i18n';
 import defaultProfile from '../../assets/default_profile.png';
 import defaultLogoWhite from '../../assets/orleu_logo_white.svg';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
@@ -70,19 +70,21 @@ const OrleuHeader = () => {
         height: '48px',
         background: 'linear-gradient(0deg, #15171E, #15171E), #F6F6F6'
       }}>
-               
+
       <div className="d-flex align-items-center justify-content-between px-3 mx-auto"
         style={{ maxWidth: '1400px', height: '100%' }}>
         <div className="d-flex align-items-center">
           <div className="d-flex align-items-center justify-content-center text-white fw-bold border-opacity-10"
-            style={{ width: '71.1px', height: '19.23px', fontSize: '16px',backgroundImage: `url(${defaultLogoWhite})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }}>
+            style={{ width: '71.1px', height: '19.23px', fontSize: '16px', backgroundImage: `url(${defaultLogoWhite})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }}>
           </div>
         </div>
-        <LanguageSwitcher  />
+        <div className="d-flex align-items-end justify-content-end ms-auto me-5 w-100 mr-5">
+          <LanguageSwitcher />
+        </div>
         <div className="d-flex align-items-center position-relative" ref={dropdownRef}>
           <div
-            className="rounded-circle border border-white border-opacity-10 d-flex align-items-center justify-content-center cursor-pointer overflow-hidden mr-2"
-            style={{ width: '30px', height: '30px' }}
+            className="rounded-circle border border-white border-opacity-10 d-flex align-items-center justify-content-center cursor-pointer overflow-hidden mr-3"
+            style={{ width: '30px', height: '30px', border: '1px solid red' }}
           >
             <img
               src={defaultProfile}
