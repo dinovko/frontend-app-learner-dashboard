@@ -25,6 +25,7 @@ import fakeData from 'data/services/lms/fakeData/courses';
 import AppWrapper from 'containers/AppWrapper';
 import LearnerDashboardHeader from 'containers/LearnerDashboardHeader';
 import OrleuHeader from 'components/OrleuHeader';
+import OrleuFooter from 'components/OrleuFooter';
 import Breadcrumbs from 'components/Breadcrumbs';
 import CoursesHeader from 'components/CoursesHeader';
 
@@ -96,6 +97,7 @@ export const App = () => {
                 <Dashboard />
               )}
           </main>
+          <OrleuFooter />
         </AppWrapper>
         {/* <FooterSlot /> */}
       </div>
